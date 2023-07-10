@@ -1,14 +1,13 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import './Header.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import '../Styles/Header.css';
+import Search from './Search';
 
 const Header = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
+  const handleSearchResults = (results) => {
+    console.log(results); // Handle the search results here
   };
+
   return (
     <nav className="navbar">
       <ul className="nav-list">
@@ -16,16 +15,10 @@ const Header = () => {
           <NavLink exact to="/" activeClassName="active">
             Home
           </NavLink>
-          </li>
-          <li className="nav-item search-bar">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
         </li>
-        
+        <li className="nav-item search-bar">
+          <Search handleSearchResults={handleSearchResults} />
+        </li>
         <li className="nav-item">
           <NavLink to="/login" activeClassName="active">
             Login
@@ -40,8 +33,8 @@ const Header = () => {
           <NavLink to="/Cart" activeClassName="active">
             Cart
           </NavLink>
-          </li>
-          <li className="nav-item">
+        </li>
+        <li className="nav-item">
           <NavLink to="/Product" activeClassName="active">
             Product
           </NavLink>

@@ -5,10 +5,8 @@ const HandleCart=()=>{}
  const Product = () => {
     return (
        <div>
-        <Header/>
+        
       <div  class="product-container">
-      
-    
       
         {ProductData.map((product) => (
           <div key={product.ProductId}>

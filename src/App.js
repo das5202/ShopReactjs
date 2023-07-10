@@ -10,6 +10,7 @@ import Product from './components/Product';
 const App = () => {
   return (
     <Router basename={process.env.PUBLIC_URL}>
+      <Header/>
       <div>
         <Switch>
           <Route exact path="/">
