@@ -1,12 +1,14 @@
 import React from 'react';
 import Header from './Header';
+import Product from './Product';
 
 const Home = () => {
   return (
     <div>
-         <Header />
+        
+         <Product/>
       
-      <h2>Home Page Content</h2>
+      
      
     </div>
   );

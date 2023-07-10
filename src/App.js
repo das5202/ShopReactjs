@@ -5,6 +5,7 @@ import LoginForm from './components/Login';
 import RegistrationForm from './components/Register';
 import Cart from './components/Cart';
 import Header from './components/Header';
+import Product from './components/Product';
 
 const App = () => {
   return (
@@ -26,6 +27,10 @@ const App = () => {
           <Route path="/cart">
             
             <Cart />
+          </Route>
+          <Route path="/product">
+            
+            <Product />
           </Route>
         </Switch>
       </div>
