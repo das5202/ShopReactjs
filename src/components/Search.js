@@ -1,38 +1,29 @@
-import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProductData from './ProductData';
 
 const SearchResults = () => {
   const location = useLocation();
-  const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = () => {
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const query = searchParams.get('query') || '';
+    setSearchTerm(query);
+    filterProducts(query);
+  }, [location.search]);
+
+  const filterProducts = (query) => {
     const results = ProductData.filter((product) =>
-      product.ProductName.toLowerCase().includes(searchTerm.toLowerCase())
+      product.ProductName.toLowerCase().includes(query.toLowerCase())
     );
     setSearchResults(results);
   };
 
-  const handleBack = () => {
-    setSearchTerm('');
-    setSearchResults([]);
-    history.goBack();
-  };
-
   return (
     <div>
-      <button onClick={handleBack}>Back</button>
-      <div>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search by product name"
-        />
-        <button onClick={handleSearch}>Search</button>
-      </div>
+      <h2>Search Results for "{searchTerm}"</h2>
       {searchResults.length > 0 ? (
         <div>
           {searchResults.map((product) => (

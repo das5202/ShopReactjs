@@ -3,17 +3,18 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import '../Styles/Header.css';
 
 const Header = () => {
-  const [showSearch, setShowSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const history = useHistory();
   const location = useLocation();
 
-  const toggleSearch = () => {
-    setShowSearch(!showSearch);
-    if (!showSearch) {
-      history.push('/search');
-    } else {
-      history.goBack();
+  const handleSearch = () => {
+    if (searchTerm.trim() !== '') {
+      history.push(`/search?query=${encodeURIComponent(searchTerm)}`);
     }
+  };
+
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
@@ -25,30 +26,48 @@ const Header = () => {
           </NavLink>
         </li>
         <li className="nav-item search-bar">
-          {location.pathname !== '/search' && (
-            <button onClick={toggleSearch}>Search</button>
-          )}
+          <input type="text" placeholder="Search..." value={searchTerm} onChange={handleInputChange} />
+          <button onClick={handleSearch}>Search</button>
         </li>
         <li className="nav-item">
-          <NavLink to="/login" activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to="/register" activeClassName="active">
-            Register
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to="/cart" activeClassName="active">
-            Cart
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink to="/product" activeClassName="active">
-            Product
-          </NavLink>
-        </li>
+
+        <NavLink to="/login" activeClassName="active">
+
+        Login
+       
+       </NavLink>
+
+       </li>
+
+      <li className="nav-item">
+
+      <NavLink to="/register" activeClassName="active">
+
+       Register
+
+      </NavLink>
+
+</li>
+
+<li className="nav-item">
+
+<NavLink to="/cart" activeClassName="active">
+
+  Cart
+
+</NavLink>
+
+</li>
+
+<li className="nav-item">
+
+<NavLink to="/product" activeClassName="active">
+
+  Product
+
+</NavLink>
+
+</li>
       </ul>
     </nav>
   );
