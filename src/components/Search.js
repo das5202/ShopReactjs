@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductData from './ProductData';
+import '../Styles/Product.css';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -22,10 +23,10 @@ const SearchResults = () => {
   };
 
   return (
-    <div>
+    <div className='Search'>
       <h2>Search Results for "{searchTerm}"</h2>
       {searchResults.length > 0 ? (
-        <div>
+        <div className='Product'>
           {searchResults.map((product) => (
             <div key={product.id}>
               <img src={product.ProductImage} alt={product.ProductName} />
