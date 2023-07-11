@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import '../Styles/Header.css';
-import Search from './Search';
 
 const Header = () => {
-  const handleSearchResults = (results) => {
-    console.log(results); // Handle the search results here
+  const [showSearch, setShowSearch] = useState(false);
+  const history = useHistory();
+  const location = useLocation();
+
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+    if (!showSearch) {
+      history.push('/search');
+    } else {
+      history.goBack();
+    }
   };
 
   return (
@@ -17,7 +25,9 @@ const Header = () => {
           </NavLink>
         </li>
         <li className="nav-item search-bar">
-          <Search handleSearchResults={handleSearchResults} />
+          {location.pathname !== '/search' && (
+            <button onClick={toggleSearch}>Search</button>
+          )}
         </li>
         <li className="nav-item">
           <NavLink to="/login" activeClassName="active">
@@ -30,12 +40,12 @@ const Header = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/Cart" activeClassName="active">
+          <NavLink to="/cart" activeClassName="active">
             Cart
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/Product" activeClassName="active">
+          <NavLink to="/product" activeClassName="active">
             Product
           </NavLink>
         </li>

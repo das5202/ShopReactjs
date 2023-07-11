@@ -1,30 +1,39 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import ProductData from './ProductData';
 
-const Search = ({ handleSearchResults }) => {
+const SearchResults = () => {
+  const location = useLocation();
+  const history = useHistory();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = (event) => {
-    const { value } = event.target;
-    setSearchTerm(value);
-
+  const handleSearch = () => {
     const results = ProductData.filter((product) =>
-      product.ProductName.toLowerCase().includes(value.toLowerCase())
+      product.ProductName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
-    handleSearchResults(results); // Call the handleSearchResults function with the results
+  };
+
+  const handleBack = () => {
+    setSearchTerm('');
+    setSearchResults([]);
+    history.goBack();
   };
 
   return (
     <div>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Search by product name"
-      />
-      {searchResults.length > 0 && (
+      <button onClick={handleBack}>Back</button>
+      <div>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by product name"
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      {searchResults.length > 0 ? (
         <div>
           {searchResults.map((product) => (
             <div key={product.id}>
@@ -35,9 +44,11 @@ const Search = ({ handleSearchResults }) => {
             </div>
           ))}
         </div>
+      ) : (
+        <p>No results found.</p>
       )}
     </div>
   );
 };
 
-export default Search;
+export default SearchResults;

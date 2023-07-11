@@ -6,33 +6,20 @@ import RegistrationForm from './components/Register';
 import Cart from './components/Cart';
 import Header from './components/Header';
 import Product from './components/Product';
+import SearchResults from './components/Search';
 
 const App = () => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
-      <Header/>
+    <Router>
+      <Header />
       <div>
         <Switch>
-          <Route exact path="/">
-            
-            <Home />
-          </Route>
-          <Route path="/login">
-            
-            <LoginForm />
-          </Route>
-          <Route path="/register">
-            
-            <RegistrationForm />
-          </Route>
-          <Route path="/cart">
-            
-            <Cart />
-          </Route>
-          <Route path="/product">
-            
-            <Product />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/search" component={SearchResults} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegistrationForm} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/product" component={Product} />
         </Switch>
       </div>
     </Router>
