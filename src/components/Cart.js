@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-
 import ProductWithCart from './ProductWithCart';
 
-
-const Cart = ({ location }) => {
+const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const itemsParam = urlParams.get('items');
-    if (itemsParam) {
-      const parsedItems = JSON.parse(decodeURIComponent(itemsParam));
-      setCartItems(parsedItems);
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
     }
-  }, [location.search]);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product) => {
+    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  };
 
   return (
     <div>
       <h2>Cart Products:</h2>
-      <ProductWithCart cartItems={cartItems} setCartItems={setCartItems} />
+      <ProductWithCart addToCart={addToCart} />
 
       <ul>
         {cartItems.map((item, index) => (
