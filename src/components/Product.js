@@ -1,13 +1,15 @@
-import Header from './Header';
-import  ProductData  from './ProductData';
-import '../Styles/Product.css';
-const HandleCart=()=>{}
- const Product = () => {
-    return (
-       <div>
-        
-      <div  class="product-container">
-      
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ProductData from './ProductData';
+
+const ProductWithCart = ({ cartItems, setCartItems }) => {
+  const addToCart = (product) => {
+    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  };
+
+  return (
+    <div>
+      <div className="product-container">
         {ProductData.map((product) => (
           <div key={product.ProductId}>
             <div>
@@ -17,14 +19,14 @@ const HandleCart=()=>{}
               <h3>{product.ProductName}</h3>
               <p>Price: {product.ProductPrice}</p>
               <p>Category: {product.ProductCategory}</p>
-              <button onclick={HandleCart}>Add to cart</button>
+              <button onClick={() => addToCart(product)}>Add to cart</button>
             </div>
           </div>
         ))}
       </div>
-      </div>
-    );
-  };
-  
-  export default Product;
-  
+      
+    </div>
+  );
+};
+
+export default ProductWithCart;
