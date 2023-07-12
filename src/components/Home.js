@@ -1,11 +1,11 @@
 import React from 'react';
-import ProductData from './ProductData'; 
-import Product from './Product';
+import ProductWithCart from './ProductWithCart';
 
-const Home = () => {
+const Home = ({ cartItems, setCartItems }) => {
   return (
     <div>
-      <Product/>
+      <h2>Home Page</h2>
+      <ProductWithCart cartItems={cartItems} setCartItems={setCartItems} />
     </div>
   );
 };
