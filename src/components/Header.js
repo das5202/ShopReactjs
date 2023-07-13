@@ -19,8 +19,8 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn'); // Remove the logged in status
-    history.push('/login'); // Redirect to the login page after logout
+    localStorage.removeItem('isLoggedIn'); 
+    history.push('/login'); 
   };
 
   return (
@@ -37,7 +37,7 @@ const Header = () => {
         </li>
         <li className="nav-item">
           {isLoggedIn ? (
-            <button onClick={handleLogout}>Logout</button> // Render the logout button when logged in
+            <button onClick={handleLogout}>Logout</button> 
           ) : (
             <NavLink to="/login" activeClassName="active">
               Login

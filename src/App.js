@@ -15,6 +15,10 @@ const ProductData = [
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
 
+  const addToCart = (product) => {
+    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  };
+
   return (
     <Router>
       <Header />
@@ -24,15 +28,12 @@ const App = () => {
           <Route path="/search" component={SearchResults} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegistrationForm} />
-          <Route path="/cart" component={Cart} />
-          <Route
-  path="/product"
-  render={(props) => (
-    <ProductWithCart {...props} cartItems={cartItems} setCartItems={setCartItems} productData={ProductData} />
-  )}
-/>
-
-
+          <Route path="/cart">
+            <Cart cartItems={cartItems} setCartItems={setCartItems} />
+          </Route>
+          <Route path="/product">
+            <ProductWithCart addToCart={addToCart} productData={ProductData} />
+          </Route>
         </Switch>
       </div>
     </Router>

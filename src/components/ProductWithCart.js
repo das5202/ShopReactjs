@@ -1,9 +1,13 @@
-import {React,useState} from 'react';
+import React from 'react';
 import ProductData from './ProductData';
 
-
 const ProductWithCart = ({ addToCart }) => {
-    
+  const handleAddToCart = (product) => {
+    if (addToCart && typeof addToCart === 'function') {
+      addToCart(product);
+    }
+  };
+
   return (
     <div>
       <div className="product-container">
@@ -16,7 +20,7 @@ const ProductWithCart = ({ addToCart }) => {
               <h3>{product.ProductName}</h3>
               <p>Price: {product.ProductPrice}</p>
               <p>Category: {product.ProductCategory}</p>
-              <button onClick={() => addToCart(product)}>Add to cart</button>
+              <button onClick={() => handleAddToCart(product)}>Add to cart</button>
             </div>
           </div>
         ))}

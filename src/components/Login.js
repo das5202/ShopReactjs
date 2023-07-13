@@ -43,7 +43,7 @@ const LoginForm = () => {
       setPassword('');
       setErrorMessages({ email: '', password: '' });
       setSuccessMessage('Login successful!');
-      history.push('/'); // Redirect to the home page after successful login
+      history.push('/'); 
     } else {
       setErrorMessages({ email: 'Invalid email', password: 'Invalid password' });
       setSuccessMessage('');
