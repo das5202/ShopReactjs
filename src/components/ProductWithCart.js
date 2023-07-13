@@ -13,7 +13,7 @@ const ProductWithCart = ({ addToCart }) => {
       <div className="product-container">
         {ProductData.map((product) => (
           <div key={product.ProductId}>
-            <div>
+            <div >
               <img src={product.ProductImage} alt={product.ProductName} />
             </div>
             <div>

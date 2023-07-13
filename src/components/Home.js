@@ -2,11 +2,13 @@ import ProductWithCart from "./ProductWithCart";
 import { useState } from "react";
 
 const Home = () => {
+  
+
   return (
     <div>
+      <h2>Home Page</h2>
       
-      this is home
     </div>
   );
-  }
+};
 export default Home;

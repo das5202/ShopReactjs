@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const Cart = ({ cartItems, setCartItems }) => {
   const removeItem = (index) => {
@@ -7,16 +6,17 @@ const Cart = ({ cartItems, setCartItems }) => {
     updatedCartItems.splice(index, 1);
     setCartItems(updatedCartItems);
   };
+
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
+
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
       setCartItems(JSON.parse(storedCartItems));
     }
-  }, []);
-  
+  }, [setCartItems]);
 
   return (
     <div>
