@@ -7,10 +7,9 @@ import Cart from './components/Cart';
 import Header from './components/Header';
 import ProductWithCart from './components/ProductWithCart';
 import SearchResults from './components/Search';
+import ProductData from './components/ProductData';
 
-const ProductData = [
-  // Define your product data here
-];
+
 
 
   const App = () => {
@@ -22,10 +21,12 @@ const ProductData = [
     useEffect(() => {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems]);
-  
     const addToCart = (product) => {
-      setCartItems((prevCartItems) => [...prevCartItems, product]);
+      const updatedCartItems = [...cartItems];
+      updatedCartItems.push({ ...product, quantity: 1 }); // Initialize quantity to 1
+      setCartItems(updatedCartItems);
     };
+    
 
   return (
     <Router>
