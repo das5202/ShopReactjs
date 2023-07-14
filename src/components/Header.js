@@ -6,7 +6,7 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const history = useHistory();
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('isLoggedIn'); // Check if the user is logged in
+  const isLoggedIn = localStorage.getItem('isLoggedIn'); 
 
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
@@ -26,11 +26,13 @@ const Header = () => {
   return (
     <nav className="navbar">
       <ul className="nav-list">
-        <li className="nav-item">
-          <NavLink exact to="/" activeClassName="active">
+      <li className="nav-item">
+          <NavLink to="/" activeClassName="active">
             Home
           </NavLink>
         </li>
+        
+        
         <li className="nav-item search-bar">
           <input type="text" placeholder="Search..." value={searchTerm} onChange={handleInputChange} />
           <button onClick={handleSearch}>Search</button>
@@ -54,11 +56,7 @@ const Header = () => {
             Cart
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink to="/product" activeClassName="active">
-            Product
-          </NavLink>
-        </li>
+        
       </ul>
     </nav>
   );

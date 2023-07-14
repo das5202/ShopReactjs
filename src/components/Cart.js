@@ -23,7 +23,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       const existingItem = acc.find((el) => el.ProductId === item.ProductId);
   
       if (existingItem) {
-        existingItem.quantity += item.quantity;
+        existingItem.quantity += 1; // Increase by 1 instead of item.quantity
       } else {
         acc.push({ ...item });
       }
@@ -31,8 +31,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       return acc;
     }, []);
   
-    setCartItems(updatedCartItems);
-    setCartItems(updatedGroupedCartItems); // Update cartItems instead of groupedCartItems
+    setCartItems(updatedGroupedCartItems); // Update with groupedCartItems instead of updatedCartItems
   };
   
   const decreaseQuantity = (productId) => {
@@ -47,7 +46,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       const existingItem = acc.find((el) => el.ProductId === item.ProductId);
   
       if (existingItem) {
-        existingItem.quantity += item.quantity;
+        existingItem.quantity -= 1; // Decrease by 1 instead of item.quantity
       } else {
         acc.push({ ...item });
       }
@@ -55,8 +54,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       return acc;
     }, []);
   
-    setCartItems(updatedCartItems);
-    setCartItems(updatedGroupedCartItems); // Update cartItems instead of groupedCartItems
+    setCartItems(updatedGroupedCartItems); // Update with groupedCartItems instead of updatedCartItems
   };
   
   

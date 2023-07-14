@@ -33,16 +33,14 @@ import ProductData from './components/ProductData';
       <Header />
       <div>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={ProductWithCart} > <ProductWithCart addToCart={addToCart} productData={ProductData} /></Route>
           <Route path="/search" component={SearchResults} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegistrationForm} />
           
           <Route path="/cart" render={() => <Cart cartItems={cartItems} setCartItems={setCartItems} addToCart={addToCart} />} />
 
-          <Route path="/product">
-            <ProductWithCart addToCart={addToCart} productData={ProductData} />
-          </Route>
+          
         </Switch>
       </div>
     </Router>
