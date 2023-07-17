@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 const Cart = ({ cartItems, setCartItems }) => {
   const [totalAmount, setTotalAmount] = useState(0);
-  
+
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    } 
+  }, [setCartItems]);
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
 
   const removeItem = (index) => {
@@ -23,7 +33,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       const existingItem = acc.find((el) => el.ProductId === item.ProductId);
   
       if (existingItem) {
-        existingItem.quantity += 1; // Increase by 1 instead of item.quantity
+        existingItem.quantity += 1; 
       } else {
         acc.push({ ...item });
       }
@@ -31,7 +41,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       return acc;
     }, []);
   
-    setCartItems(updatedGroupedCartItems); // Update with groupedCartItems instead of updatedCartItems
+    setCartItems(updatedGroupedCartItems); 
   };
   
   const decreaseQuantity = (productId) => {
@@ -46,7 +56,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       const existingItem = acc.find((el) => el.ProductId === item.ProductId);
   
       if (existingItem) {
-        existingItem.quantity -= 1; // Decrease by 1 instead of item.quantity
+        existingItem.quantity -= 1; 
       } else {
         acc.push({ ...item });
       }
@@ -54,7 +64,7 @@ const Cart = ({ cartItems, setCartItems }) => {
       return acc;
     }, []);
   
-    setCartItems(updatedGroupedCartItems); // Update with groupedCartItems instead of updatedCartItems
+    setCartItems(updatedGroupedCartItems); 
   };
   
   
@@ -66,6 +76,7 @@ const Cart = ({ cartItems, setCartItems }) => {
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
+    console.log('Retreving cart items:',storedCartItems);
     if (storedCartItems) {
       setCartItems(JSON.parse(storedCartItems));
     }

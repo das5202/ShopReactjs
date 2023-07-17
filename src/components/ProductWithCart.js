@@ -1,10 +1,17 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductData from './ProductData';
+import '../Styles/Product.css';
 
-const ProductWithCart = ({ addToCart }) => {
+const ProductWithCart = ({ addToCart, isLoggedIn }) => {
+  const history = useHistory();
+
   const handleAddToCart = (product) => {
-    if (addToCart && typeof addToCart === 'function') {
+    if (isLoggedIn) {
       addToCart(product);
+    } else {
+      
+      history.push('/login');
     }
   };
 
@@ -12,11 +19,11 @@ const ProductWithCart = ({ addToCart }) => {
     <div>
       <div className="product-container">
         {ProductData.map((product) => (
-          <div key={product.ProductId}>
-            <div >
+          <div key={product.ProductId} className="product-item">
+            <div className="Product">
               <img src={product.ProductImage} alt={product.ProductName} />
             </div>
-            <div>
+            <div className="product-info">
               <h3>{product.ProductName}</h3>
               <p>Price: {product.ProductPrice}</p>
               <p>Category: {product.ProductCategory}</p>

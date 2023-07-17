@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import '../Styles/Login.css';
 import Header from './Header';
 
-const LoginForm = () => {
+const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessages, setErrorMessages] = useState({ email: '', password: '' });
@@ -39,11 +39,12 @@ const LoginForm = () => {
 
     if (user) {
       localStorage.setItem('isLoggedIn', true);
+      setIsLoggedIn(true);
       setEmail('');
       setPassword('');
       setErrorMessages({ email: '', password: '' });
       setSuccessMessage('Login successful!');
-      history.push('/'); 
+      history.push('/');
     } else {
       setErrorMessages({ email: 'Invalid email', password: 'Invalid password' });
       setSuccessMessage('');
@@ -52,7 +53,6 @@ const LoginForm = () => {
 
   return (
     <div className="login-form">
-      
       <h1>Login form</h1>
       {errorMessages.email && <p className="error">{errorMessages.email}</p>}
       <input
